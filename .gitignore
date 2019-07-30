@@ -105,3 +105,4 @@ venv.bak/
 
 # Test files
 .test.rtf
+.testfile.txt
