@@ -1,19 +1,31 @@
 import os
 
-this_folder = os.path.dirname(os.path.abspath(__file__))
-the_file = os.path.join(this_folder, "test.rtf")
 
+def auto_format_rtf(file_path):
+    # Takes in complete filepath as input and replaces all
+    # line breaks with paragraph breaks and writes to
+    # file with filename + "MODIFIED"
+    # returns None
 
-with open(the_file) as file:
-    text_data = file.readlines()
+    file_location = os.path.dirname(file_path)
+    os.chdir(file_location)
 
-new_file_lines = []
+    if os.path.exists(file_path):
+        with open(file_path) as file:
+            text_data = file.readlines()
 
-for line in text_data:
-    new_file_lines.append(line.replace("\line", "\par"))
+        new_file_lines = []
+        for line in text_data:
+            new_file_lines.append(line.replace("\line", "\par"))
 
-new_file = os.path.join(this_folder, "new_test.rtf")
+        file_name, file_ext = os.path.splitext(file_path)
 
-with open(new_file, "w") as file:
-    for line in new_file_lines:
-        file.write(line)
+        new_file_name = file_name + " MODIFIED" + file_ext
+
+        new_file = os.path.join(file_location, new_file_name)
+
+        with open(new_file, "w+") as file:
+            for line in new_file_lines:
+                file.write(line)
+
+    return None
