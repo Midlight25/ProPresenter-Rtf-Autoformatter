@@ -13,37 +13,36 @@ def auto_format_rtf(file_path):
 
     # Verifies that file exists and is .rtf before starting
     if os.path.exists(file_path) and file_ext == ".rtf":
-        #print("Checks passed, beginning process.")
-        #print("Modifiying {file_name}{file_ext}.".format(file_name=file_name, file_ext=file_ext))
+        # print("Checks passed, beginning process.")
+        # print("Modifiying {file_name}{file_ext}.".format(file_name=file_name, file_ext=file_ext))
 
         # Finds file directory from file path and changes to it.
         file_location = os.path.dirname(file_path)
         os.chdir(file_location)
-        #print("Active directory changed to {file_location}.".format(file_location=file_location))
+        # print("Active directory changed to {file_location}.".format(file_location=file_location))
 
         # Opens file and copies data to text_data.
         with open(file_path) as file:
-            text_data = file.readlines()
-        #print("Opened file and read data to text_data.")
+            text_data = file.read()
+        # print("Opened file and read data to text_data.")
 
         # Formats data and adds it to list for appending.
-        new_file_lines = []
-        for line in text_data:
-            new_file_lines.append(line.replace("\line", "\par"))
-        #print("Formatted data and appended to new_file_lines")
+        new_text_data = text_data.replace("\line", "\par")
+        # print("Formatted data")
 
         # Creates new file name and path from original file data.
         new_file_name = file_name + " MODIFIED" + file_ext
         new_file = os.path.join(file_location, new_file_name)
-        #print("Created new file name, new file at {new_file}".format(new_file=new_file))
+        # print("Created new file name, new file at {new_file}".format(new_file=new_file))
 
         # Writes data to new file
         with open(new_file, "w+") as file:
-            for line in new_file_lines:
-                file.write(line)
-        print("Wrote data to \"{new_file_name}\".".format(new_file_name=new_file_name))
+            file.write(new_text_data)
+        # print("Wrote data to \"{new_file_name}\".".format(new_file_name=new_file_name))
     return new_file
 
+
+auto_format_rtf("C:/Users/micha/Desktop/renamed.rtf")
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
