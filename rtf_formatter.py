@@ -45,14 +45,19 @@ def auto_format_rtf(file_path):
 auto_format_rtf("C:/Users/micha/Desktop/renamed.rtf")
 
 if __name__ == '__main__':
+
     if len(sys.argv) > 1:
         for arg in sys.argv[1:]:
             if os.path.exists(arg):
+
                 sys.stdout.write("Modifiying file {filename}.\n".format(filename=arg))
                 new_file_path = auto_format_rtf(arg)
+
                 if os.path.exists(new_file_path):
                     sys.stdout.write("New file created @ {file_path}.\n".format(
                         file_path=new_file_path))
+                else:
+                    sys.stderr.write("Error creating new file.\n")
             else:
                 sys.stdout.write(
                     "{file_path} does not exist, file not created.".format(file_path=arg))
