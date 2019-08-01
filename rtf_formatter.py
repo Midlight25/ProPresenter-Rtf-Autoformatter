@@ -42,8 +42,6 @@ def auto_format_rtf(file_path):
     return new_file
 
 
-auto_format_rtf("C:/Users/micha/Desktop/renamed.rtf")
-
 if __name__ == '__main__':
 
     if len(sys.argv) > 1:
