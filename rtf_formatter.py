@@ -41,7 +41,7 @@ def auto_format_rtf(file_path):
         with open(new_file, "w+") as file:
             for line in new_file_lines:
                 file.write(line)
-        #print("Wrote data to \"{new_file_name}\".".format(new_file_name=new_file_name))
+        print("Wrote data to \"{new_file_name}\".".format(new_file_name=new_file_name))
     return new_file
 
 
