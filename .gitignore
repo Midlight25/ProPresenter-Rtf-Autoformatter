@@ -102,3 +102,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Test files
+/test.rtf
+/testfile.txt
+/new_test.rtf
