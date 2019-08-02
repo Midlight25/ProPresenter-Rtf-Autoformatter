@@ -59,3 +59,5 @@ if __name__ == '__main__':
             else:
                 sys.stdout.write(
                     "{file_path} does not exist, file not created.".format(file_path=arg))
+
+    print("test")
