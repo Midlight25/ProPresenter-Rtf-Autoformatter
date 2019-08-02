@@ -71,11 +71,12 @@ if __name__ == '__main__':
         while not crashed == True:
             file_path_get = input(
                 "Please paste the full path of the file you want to modify or write \"quit\" to exit the program:\n")
+            file_path_get = file_path_get.replace("\"", "")
             if file_path_get in acceptable_exit_answers:
                 sys.exit("Program exited by user")
             try:
                 auto_format_rtf(file_path_get)
             except:
-                sys.stderr.write("Program was unable to create new file, please try again.")
+                sys.stderr.write("Program was unable to create new file, please try again.\n")
                 sys.stderr.flush()
         sys.exit("System crashed.")
