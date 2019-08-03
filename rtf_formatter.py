@@ -1,6 +1,7 @@
 import os
 import sys
 from tkinter import filedialog as fdialog
+from tkinter import Tk
 
 
 def auto_format_rtf(file_path):
@@ -67,6 +68,8 @@ if __name__ == '__main__':
     else:
         sys.stdout.write("\nProPresenter RTF Autoformatter © Midlight25 2019\n\n")
         sys.stdout.flush()
+        root = Tk()
+        root.withdraw()
         crashed = False
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
