@@ -1,5 +1,6 @@
 import os
 import sys
+from tkinter import filedialog as fdialog
 
 
 def auto_format_rtf(file_path):
@@ -67,17 +68,21 @@ if __name__ == '__main__':
         sys.stdout.write("\nProPresenter RTF Autoformatter © Midlight25 2019\n\n")
         sys.stdout.flush()
         crashed = False
-        acceptable_exit_answers = ["quit", "q", "Q", "Quit"]
+        acceptable_exit_answers = ["quit", "q"]
+        acceptable_input_answers = ["input", "i"]
+        current_selected_file = None
 
         while not crashed == True:
-            file_path_get = input(
-                "Please paste the full path of the file you want to modify or write \"quit\" to exit the program:\n")
-            file_path_get = file_path_get.replace("\"", "")
-            if file_path_get in acceptable_exit_answers:
+            print("Type (I)nput to select your file or (Q)uit to exit the program:")
+            selection = raw_input("")
+            if selection.lower() in acceptable_exit_answers:
                 sys.exit("Program exited by user")
-            try:
-                auto_format_rtf(file_path_get)
-            except:
-                sys.stderr.write("Program was unable to create new file, please try again.\n")
-                sys.stderr.flush()
+            if seletion.lower() in acceptable_input_answers:
+                file_selected = tk.fdialog()
+                try:
+                    auto_format_rtf(file_path_get)
+                except:
+                    sys.stderr.write("Program was unable to create new file, please try again.\n")
+                    sys.stderr.flush()
+
         sys.exit("System crashed.")
