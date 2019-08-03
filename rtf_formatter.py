@@ -68,6 +68,7 @@ if __name__ == '__main__':
         sys.stdout.flush()
         crashed = False
         acceptable_exit_answers = ["quit", "q", "Q", "Quit"]
+
         while not crashed == True:
             file_path_get = input(
                 "Please paste the full path of the file you want to modify or write \"quit\" to exit the program:\n")
