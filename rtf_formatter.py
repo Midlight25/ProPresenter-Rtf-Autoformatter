@@ -70,19 +70,43 @@ if __name__ == '__main__':
         crashed = False
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
+        acceptable_cancel_answers = ["cancel", "c"]
         current_selected_file = None
 
-        while not crashed == True:
+        while crashed != True:
             print("Type (I)nput to select your file or (Q)uit to exit the program:")
-            selection = raw_input("")
+            selection = input("")
+
             if selection.lower() in acceptable_exit_answers:
                 sys.exit("Program exited by user")
-            if seletion.lower() in acceptable_input_answers:
-                file_selected = tk.fdialog()
-                try:
-                    auto_format_rtf(file_path_get)
-                except:
-                    sys.stderr.write("Program was unable to create new file, please try again.\n")
-                    sys.stderr.flush()
 
+            elif selection.lower() in acceptable_input_answers:
+                current_selected_file = fdialog.askopenfilename(
+                    initialdir="/", title="Select file", filetypes=[("Rich Text Format files", "*.rtf")])
+                user_canceled = False
+
+                if current_selected_file == "":
+                    print("User canceled file operation, returning to main menu.\n")
+                    continue
+
+                while not user_canceled == True:
+                    user_warning = input("\nYou selected {file} for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
+                        file=os.path.basename(current_selected_file)))
+
+                    if user_warning.lower() == "ok":
+                        try:
+                            auto_format_rtf(current_selected_file)
+                            break
+                        except:
+                            print("Program was unable to create new file, please try again.\n")
+                            break
+
+                    elif user_warning.lower() in acceptable_cancel_answers:
+                        print("User canceled operation.")
+                        break
+                    else:
+                        print("Unable to understand user input, please try again.")
+
+            else:
+                print("Did not understand user input. Please try again\n")
         sys.exit("System crashed.")
