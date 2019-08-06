@@ -70,14 +70,13 @@ if __name__ == '__main__':
         sys.stdout.flush()
         root = Tk()
         root.withdraw()
-        crashed = False
+        currently_running = True
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
         acceptable_cancel_answers = ["cancel", "c"]
         current_selected_file = None
-        fake_variable = None
 
-        while crashed != True:
+        while currently_running == True:
             print("Type (I)nput to select your file or (Q)uit to exit the program:")
             selection = input("")
 
