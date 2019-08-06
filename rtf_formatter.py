@@ -68,8 +68,6 @@ if __name__ == '__main__':
     else:
         sys.stdout.write("\nProPresenter RTF Autoformatter © Midlight25 2019\n\n")
         sys.stdout.flush()
-        root = Tk()
-        root.withdraw()
         currently_running = True
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
@@ -84,17 +82,25 @@ if __name__ == '__main__':
                 sys.exit("Program exited by user")
 
             elif selection.lower() in acceptable_input_answers:
-                current_selected_file = fdialog.askopenfilename(
-                    initialdir="/", title="Select file", filetypes=[("Rich Text Format files", "*.rtf")])
-                user_canceled = False
+                root = Tk()
+                root.withdraw()
+                if sys.platform.startswith('win32'):
+                    default_directory = os.path.join(os.getenv('USERPROFILE'), "Documents")
+                    current_selected_file = fdialog.askopenfilename(
+                        initialdir=default_directory, title="Select file", filetypes=[("Rich Text Format files", "*.rtf")])
+                else:
+                    current_selected_file = fdialog.askopenfilename(
+                        initialdir="\", title="Select file", filetypes=[("Rich Text Format files", "*.rtf")])
+
+                user_canceled=False
 
                 if current_selected_file == "":
                     print("User canceled file operation, returning to main menu.\n")
                     continue
 
                 while not user_canceled == True:
-                    user_warning = input("\nYou selected {file} for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
-                        file=os.path.basename(current_selected_file)))
+                    user_warning=input("\nYou selected {file} for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
+                        file = os.path.basename(current_selected_file)))
 
                     if user_warning.lower() == "ok":
                         try:
