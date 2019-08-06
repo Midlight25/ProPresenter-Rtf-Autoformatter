@@ -75,6 +75,7 @@ if __name__ == '__main__':
         acceptable_input_answers = ["input", "i"]
         acceptable_cancel_answers = ["cancel", "c"]
         current_selected_file = None
+        fake_variable = None
 
         while crashed != True:
             print("Type (I)nput to select your file or (Q)uit to exit the program:")
