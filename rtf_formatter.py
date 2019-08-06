@@ -90,17 +90,17 @@ if __name__ == '__main__':
                         initialdir=default_directory, title="Select file", filetypes=[("Rich Text Format files", "*.rtf")])
                 else:
                     current_selected_file = fdialog.askopenfilename(
-                        initialdir="\", title="Select file", filetypes=[("Rich Text Format files", "*.rtf")])
+                        initialdir="/", title="Select file", filetypes=[("Rich Text Format files", "*.rtf")])
 
-                user_canceled=False
+                user_canceled = False
 
                 if current_selected_file == "":
                     print("User canceled file operation, returning to main menu.\n")
                     continue
 
                 while not user_canceled == True:
-                    user_warning=input("\nYou selected {file} for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
-                        file = os.path.basename(current_selected_file)))
+                    user_warning = input("\nYou selected {file} for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
+                        file=os.path.basename(current_selected_file)))
 
                     if user_warning.lower() == "ok":
                         try:
