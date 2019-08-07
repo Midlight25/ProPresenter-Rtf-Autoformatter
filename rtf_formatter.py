@@ -63,13 +63,16 @@ if __name__ == '__main__':
                 print(
                     "\"{file_path}\" does not exist, file not created.".format(file_path=arg))
 
+    # Starts the CLI Environment - will rework with Argparse library
     else:
+
         print("\nProPresenter RTF Autoformatter © Midlight25 2019\n")
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
         acceptable_cancel_answers = ["cancel", "c"]
         currently_running = True
 
+        # Processing loop
         while currently_running == True:
             print("Type (I)nput to select your file or (Q)uit to exit the program:")
             selection = input("")
@@ -82,8 +85,8 @@ if __name__ == '__main__':
                 root = Tk()
                 root.withdraw()
 
+                # Opens Documents Directory on Windows
                 if sys.platform.startswith('win32'):
-                    # Opens Documents Directory on Windows
                     default_directory = os.path.join(os.getenv('USERPROFILE'),
                                                      "Documents")
                     current_selected_file = fdialog.askopenfilename(
@@ -91,24 +94,27 @@ if __name__ == '__main__':
                         title="Select file",
                         filetypes=[("Rich Text Format files", "*.rtf")])
 
+                # Opens Desktop Directory on Mac OS X
                 elif sys.platform.startswith('darwin'):
-                    # Opens Desktop Directory on Mac OS X
                     default_directory = os.path.join(os.getenv("HOME"), "Desktop")
                     current_selected_file = fdialog.askopenfilename(
                         initialdir=default_directory,
                         title="Select file",
                         filetypes=[("Rich Text Format files", "*.rtf")])
 
+                # Any Unrecognized OS - Need to add Linux support
                 else:
                     current_selected_file = fdialog.askopenfilename(
                         initialdir="/",
                         title="Select file",
                         filetypes=[("Rich Text Format files", "*.rtf")])
 
+                # When user cancels file selection, tk returns empty string.
                 if current_selected_file == "":
                     print("User canceled file operation, returning to main menu.\n")
                     continue
 
+                # Initiates confirmation session
                 end_session = False
                 while end_session == False:
                     user_warning = input("\nYou selected \"{file}\" for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
@@ -132,4 +138,5 @@ if __name__ == '__main__':
 
             else:
                 print("Did not understand user input. Please try again\n")
+
         sys.exit("System crashed.")
