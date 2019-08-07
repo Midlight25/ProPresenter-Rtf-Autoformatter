@@ -16,18 +16,12 @@ def auto_format_rtf(file_path):
 
     # Verifies that file exists and is .rtf before starting
     if os.path.exists(file_path) and file_ext == ".rtf":
-        print("Checks passed on {file_path}, beginning process.".format(file_path=file_path))
+        print("Checks passed on \"{file_path}\", beginning process.".format(file_path=file_path))
         print("Modifiying \"{file_name}{file_ext}\".".format(file_name=file_name,
                                                              file_ext=file_ext))
 
-        # Finds file directory from file path and changes to it.
-        file_location = os.path.dirname(file_path)
-        os.chdir(file_location)
-        print("Active directory changed to \"{file_location}\".".format(
-            file_location=file_location))
-
         # Opens file and copies data to text_data.
-        with open(file_path) as file:
+        with open(file_path, "r") as file:
             text_data = file.read()
         print("Opened file and read data to text_data.")
 
@@ -36,6 +30,7 @@ def auto_format_rtf(file_path):
         print("Formatted data")
 
         # Creates new file name and path from original file data.
+        file_location = os.path.dirname(file_path)
         new_file_name = file_name + " MODIFIED" + file_ext
         new_file = os.path.join(file_location, new_file_name)
         print("Created new file name, new file at \"{new_file}\"".format(new_file=new_file))
