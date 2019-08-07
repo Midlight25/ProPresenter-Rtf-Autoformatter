@@ -5,12 +5,13 @@ from tkinter import Tk
 
 
 def auto_format_rtf(file_path):
-    # Takes in complete filepath as input and replaces all
-    # line breaks with paragraph breaks and writes to
-    # file with filename + "MODIFIED"
-    # returns the new file path
-
+    """Takes in complete filepath as input and replaces all
+        line breaks with paragraph breaks and writes to
+        file with filename + "MODIFIED"
+    returns the new file path
+    """
     # Gets file name and extension for creation of new file name and path
+    # It's here because the next if statement checks if this file is an ".rtf"
     file_name, file_ext = os.path.splitext(os.path.basename(file_path))
 
     # Verifies that file exists and is .rtf before starting
@@ -43,11 +44,14 @@ def auto_format_rtf(file_path):
         with open(new_file, "w+") as file:
             file.write(new_text_data)
         print("Wrote data to \"{new_file_name}\".\n".format(new_file_name=new_file_name))
+
     return new_file
 
 
 if __name__ == '__main__':
 
+    # If script is passed to commandline w/ arguments
+    # interates through the list of arguments and applies function as it goes.
     if len(sys.argv) > 1:
         for arg in sys.argv[1:]:
             if os.path.exists(arg):
@@ -70,7 +74,6 @@ if __name__ == '__main__':
         acceptable_input_answers = ["input", "i"]
         acceptable_cancel_answers = ["cancel", "c"]
         currently_running = True
-        current_selected_file = None
 
         while currently_running == True:
             print("Type (I)nput to select your file or (Q)uit to exit the program:")
@@ -83,40 +86,52 @@ if __name__ == '__main__':
                 # Removes an extra window that appears when the file dialog activates
                 root = Tk()
                 root.withdraw()
+
                 if sys.platform.startswith('win32'):
+                    # Opens Documents Directory on Windows
                     default_directory = os.path.join(os.getenv('USERPROFILE'),
                                                      "Documents")
                     current_selected_file = fdialog.askopenfilename(
                         initialdir=default_directory,
                         title="Select file",
                         filetypes=[("Rich Text Format files", "*.rtf")])
+
+                elif sys.platform.startswith('darwin'):
+                    # Opens Desktop Directory on Mac OS X
+                    default_directory = os.path.join(os.getenv("HOME"), "Desktop")
+                    current_selected_file = fdialog.askopenfilename(
+                        initialdir=default_directory,
+                        title="Select file",
+                        filetypes=[("Rich Text Format files", "*.rtf")])
+
                 else:
                     current_selected_file = fdialog.askopenfilename(
-                        initialdir="/", title="Select file", filetypes=[("Rich \
-                        Text Format files", "*.rtf")])
-
-                user_canceled = False
+                        initialdir="/",
+                        title="Select file",
+                        filetypes=[("Rich Text Format files", "*.rtf")])
 
                 if current_selected_file == "":
                     print("User canceled file operation, returning to main menu.\n")
                     continue
 
-                while user_canceled == False:
+                end_session = False
+                while end_session == False:
                     user_warning = input("\nYou selected \"{file}\" for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
                         file=os.path.basename(current_selected_file)))
 
                     if user_warning.lower() == "ok":
                         try:
                             auto_format_rtf(current_selected_file)
-                            break
+                            end_session = True
                         except:
                             print("Program was unable to create new file, \
                                 please try again.\n")
-                            break
+                            end_session = True
 
                     elif user_warning.lower() in acceptable_cancel_answers:
                         print("User canceled operation.")
-                        user_canceled = True
+                        end_session = True
+
                     else:
                         print("Unable to understand user input, please try again.")
 
