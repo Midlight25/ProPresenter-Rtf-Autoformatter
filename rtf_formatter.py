@@ -74,10 +74,10 @@ if __name__ == '__main__':
 
         # Processing loop
         while currently_running == True:
-         print("Type (I)nput to select your file or (Q)uit to exit the program:")
-          selection = input("")
+            print("Type (I)nput to select your file or (Q)uit to exit the program:")
+            selection = input("")
 
-           if selection.lower() in acceptable_exit_answers:
+            if selection.lower() in acceptable_exit_answers:
                 sys.exit("Program exited by user")
 
             elif selection.lower() in acceptable_input_answers:
