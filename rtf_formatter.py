@@ -16,9 +16,10 @@ def auto_format_rtf(file_path):
 
     # Verifies that file exists and is .rtf before starting
     if os.path.exists(file_path) and file_ext == ".rtf":
-        print("Checks passed on \"{file_path}\", beginning process.".format(file_path=file_path))
-        print("Modifiying \"{file_name}{file_ext}\".".format(file_name=file_name,
-                                                             file_ext=file_ext))
+        print("Checks passed on \"{file_path}\", beginning process.".format(
+            file_path=file_path))
+        print("Modifiying \"{file_name}{file_ext}\".".format(
+            file_name=file_name, file_ext=file_ext))
 
         # Opens file and copies data to text_data.
         with open(file_path, "r") as file:
@@ -26,19 +27,22 @@ def auto_format_rtf(file_path):
         print("Opened file and read data to text_data.")
 
         # Formats data and adds it to list for appending.
-        new_text_data = text_data.replace("\line", "\par")
+        # The double line will only be read as one by python.
+        new_text_data = text_data.replace("\\line", "\\par")
         print("Formatted data")
 
         # Creates new file name and path from original file data.
         file_location = os.path.dirname(file_path)
         new_file_name = file_name + " MODIFIED" + file_ext
         new_file = os.path.join(file_location, new_file_name)
-        print("Created new file name, new file at \"{new_file}\"".format(new_file=new_file))
+        print("Created new file name, new file at \"{new_file}\"".format(
+            new_file=new_file))
 
         # Writes data to new file
         with open(new_file, "w+") as file:
             file.write(new_text_data)
-        print("Wrote data to \"{new_file_name}\".\n".format(new_file_name=new_file_name))
+        print("Wrote data to \"{new_file_name}\".\n".format(
+            new_file_name=new_file_name))
 
     return new_file
 
@@ -61,7 +65,8 @@ if __name__ == '__main__':
 
             else:
                 print(
-                    "\"{file_path}\" does not exist, file not created.".format(file_path=arg))
+                    "\"{file_path}\" does not exist, file not created.".format(
+                        file_path=arg))
 
     # Starts the CLI Environment - will rework with Argparse library
     else:
@@ -73,15 +78,17 @@ if __name__ == '__main__':
         currently_running = True
 
         # Processing loop
-        while currently_running == True:
-            print("Type (I)nput to select your file or (Q)uit to exit the program:")
+        while currently_running is True:
+            print("Type (I)nput to select a file "
+                  "or (Q)uit to exit the program:")
             selection = input("")
 
             if selection.lower() in acceptable_exit_answers:
                 sys.exit("Program exited by user")
 
             elif selection.lower() in acceptable_input_answers:
-                # Removes an extra window that appears when the file dialog activates
+                # Removes an extra window that appears
+                # when the file dialog activates
                 root = Tk()
                 root.withdraw()
 
@@ -96,7 +103,8 @@ if __name__ == '__main__':
 
                 # Opens Desktop Directory on Mac OS X
                 elif sys.platform.startswith('darwin'):
-                    default_directory = os.path.join(os.getenv("HOME"), "Desktop")
+                    default_directory = os.path.join(
+                        os.getenv("HOME"), "Desktop")
                     current_selected_file = fdialog.askopenfilename(
                         initialdir=default_directory,
                         title="Select file",
@@ -111,7 +119,8 @@ if __name__ == '__main__':
 
                 # When user cancels file selection, tk returns empty string.
                 if current_selected_file == "":
-                    print("User canceled file operation, returning to main menu.\n")
+                    print("User canceled file operation,"
+                          " returning to main menu.\n")
                     continue
 
                 # Initiates confirmation session
