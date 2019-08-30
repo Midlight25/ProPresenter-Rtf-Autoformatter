@@ -125,7 +125,7 @@ if __name__ == '__main__':
 
                 # Initiates confirmation session
                 end_session = False
-                while end_session == False:
+                while end_session is False:
                     user_warning = input("\nYou selected \"{file}\" for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
                         file=os.path.basename(current_selected_file)))
 
