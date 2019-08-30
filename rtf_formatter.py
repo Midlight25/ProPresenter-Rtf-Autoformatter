@@ -134,8 +134,8 @@ if __name__ == '__main__':
                             auto_format_rtf(current_selected_file)
                             end_session = True
                         except:
-                            print("Program was unable to create new file, \
-                                please try again.\n")
+                            print("Program was unable to create new file,"
+                                  " please try again.\n")
                             end_session = True
 
                     elif user_warning.lower() in acceptable_cancel_answers:
@@ -143,7 +143,8 @@ if __name__ == '__main__':
                         end_session = True
 
                     else:
-                        print("Unable to understand user input, please try again.")
+                        print("Unable to understand user input, "
+                              "please try again.")
 
             else:
                 print("Did not understand user input. Please try again\n")
