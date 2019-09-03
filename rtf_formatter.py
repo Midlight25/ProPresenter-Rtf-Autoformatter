@@ -168,8 +168,10 @@ if __name__ == '__main__':
                 # Initiates confirmation session
                 end_session = False
                 while not end_session:
-                    print("\nYou selected \"{file}\" for formating, is this (OK)? Or type (C)ancel to cancel. \n".format(
-                        file=os.path.basename(current_selected_file)))
+                    print("\nYou selected \"{file}\" for formating, "
+                          "is this (OK)? Or type (C)ancel to cancel. \n"
+                          .format(file=os.path.basename
+                                  (current_selected_file)))
                     user_warning = input(">")
 
                     if user_warning.lower() == "ok":
