@@ -102,7 +102,7 @@ if __name__ == '__main__':
         currently_running = True
 
         # Processing loop
-        while currently_running == True:
+        while currently_running:
             print("Type (I)nput to select a file "
                   "or (Q)uit to exit the program:")
             selection = input("")
@@ -143,8 +143,8 @@ if __name__ == '__main__':
 
                 # When user cancels file selection, tk returns empty string.
                 if current_selected_file == "":
-                    print("User canceled file operation,"
-                          " returning to main menu.\n")
+                    print("User canceled file operation, "
+                          "returning to main menu.\n")
                     continue
 
                 # Initiates confirmation session
