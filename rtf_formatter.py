@@ -109,11 +109,10 @@ if __name__ == '__main__':
                 print("\"{file_path}\" does not exist."
                       .format(file_path=file))
 
-    print("Instance terminated without any issues.")
+        print("Instance terminated without any issues.")
 
     # Starts the CLI Environment - will rework with Argparse library
     else:
-
         print("\nProPresenter RTF Autoformatter © Midlight25 2019\n")
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
