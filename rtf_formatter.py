@@ -50,24 +50,47 @@ def auto_format_rtf(file_path):
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser(description="Formats .rtf files for use "
+                                     "with ProPresenter6 import function. "
+                                     "Or optionally, you can run without "
+                                     "arguments and you will be brought to an "
+                                     "interactive commandline interface.")
+
+    parser.add_argument("-c", "--confirm", action="store_true",
+                        help="Skips having to confirm processing on every "
+                        "file")
+    parser.add_argument("-f", "--files", nargs="*",
+                        help="Full file paths of all files "
+                        "that you want to process")
+
+    args = parser.parse_args()
+
     # If script is passed to commandline w/ arguments
     # interates through the list of arguments and applies function as it goes.
-    if len(sys.argv) > 1:
-        for arg in sys.argv[1:]:
-            if os.path.exists(arg):
-                print("Modifiying file \"{filename}\".\n".format(filename=arg))
-                new_file_path = auto_format_rtf(arg)
+    if args.file is list():
+        for file in args.files:
+            if not args.confirm:
+                print("Are you sure you want to modify \"{filename}\"? \n"
+                      "(y or n)?".format(filename=file))
+                selection = input(">")
+                if selection.lower() == "n":
+                    print("User canceled operation for \"{filename}\"."
+                          .format(filename=file))
+                    continue
+            if os.path.exists(file):
+                print("Modifiying file \"{filename}\".\n"
+                      .format(filename=file))
+                new_file_path = auto_format_rtf(file)
 
                 if os.path.exists(new_file_path):
-                    print("New file created @ \"{file_path}\".\n".format(
-                        file_path=new_file_path))
+                    print("New file created @ \"{file_path}\".\n"
+                          .format(file_path=new_file_path))
                 else:
                     print("Error creating new file.\n")
 
             else:
-                print(
-                    "\"{file_path}\" does not exist, file not created.".format(
-                        file_path=arg))
+                print("\"{file_path}\" does not exist, "
+                      "file not created.".format(file_path=file))
 
     # Starts the CLI Environment - will rework with Argparse library
     else:
