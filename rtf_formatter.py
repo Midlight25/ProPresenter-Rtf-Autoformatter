@@ -70,13 +70,13 @@ if __name__ == '__main__':
     if args.file is list():
         for file in args.files:
             if not args.confirm:
-                print("Are you sure you want to modify \"{filename}\"? \n"
-                      "(y or n)?".format(filename=file))
-                selection = input(">")
-                if selection.lower() == "n":
-                    print("User canceled operation for \"{filename}\"."
-                          .format(filename=file))
-                    continue
+                descision = None
+                while descision is None:
+                    print("Are you sure you would like to modify "
+                          "\"{filename}\"? Please confirm. \n"
+                          "(y/n)?".format(filename=file))
+                    selection = input(">")
+                    if selection
             if os.path.exists(file):
                 print("Modifiying file \"{filename}\".\n"
                       .format(filename=file))
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         currently_running = True
 
         # Processing loop
-        while currently_running is True:
+        while currently_running == True:
             print("Type (I)nput to select a file "
                   "or (Q)uit to exit the program:")
             selection = input("")
