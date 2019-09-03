@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 from tkinter import filedialog as fdialog
 from tkinter import Tk
 
@@ -49,28 +50,69 @@ def auto_format_rtf(file_path):
 
 if __name__ == '__main__':
 
+    parser = argparse.ArgumentParser(description="Formats .rtf files for use "
+                                     "with ProPresenter6 import function. "
+                                     "Or optionally, you can run without "
+                                     "arguments and you will be brought to an "
+                                     "interactive commandline interface.")
+
+    parser.add_argument("-c", "--confirm", action="store_true",
+                        help="Skips having to confirm processing on every "
+                        "file")
+    parser.add_argument("-f", "--files", nargs="*",
+                        help="Full file paths of all files "
+                        "that you want to process")
+
+    args = parser.parse_args()
+
     # If script is passed to commandline w/ arguments
     # interates through the list of arguments and applies function as it goes.
-    if len(sys.argv) > 1:
-        for arg in sys.argv[1:]:
-            if os.path.exists(arg):
-                print("Modifiying file \"{filename}\".\n".format(filename=arg))
-                new_file_path = auto_format_rtf(arg)
+    if args.files is not None:
+        for file in args.files:
+            if os.path.exists(file):
+                print("Modifiying file \"{filename}\".\n"
+                      .format(filename=file))
 
+                if not args.confirm:
+                    descision = None
+                    while descision is None:
+                        print("Are you sure you would like to modify "
+                              "\"{filename}\"? Please confirm. \n"
+                              "(y/n)?".format(filename=file))
+                        selection = input(">")
+
+                        if selection == "n":
+                            print("User canceled processing on \"{filename}\"."
+                                  "\n"
+                                  .format(filename=file))
+                            descision = False
+
+                        elif selection == "y":
+                            print("Recieved go-ahead for \"{filename}\".\n"
+                                  .format(filename=file))
+                            descision = True
+
+                        else:
+                            print("Invalid Selection, please try again. \n")
+
+                    if not descision:
+                        continue
+
+                new_file_path = auto_format_rtf(file)
                 if os.path.exists(new_file_path):
-                    print("New file created @ \"{file_path}\".\n".format(
-                        file_path=new_file_path))
+                    print("New file created @ \"{file_path}\".\n"
+                          .format(file_path=new_file_path))
                 else:
                     print("Error creating new file.\n")
 
             else:
-                print(
-                    "\"{file_path}\" does not exist, file not created.".format(
-                        file_path=arg))
+                print("\"{file_path}\" does not exist."
+                      .format(file_path=file))
+
+        print("Instance terminated without any issues.")
 
     # Starts the CLI Environment - will rework with Argparse library
     else:
-
         print("\nProPresenter RTF Autoformatter © Midlight25 2019\n")
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
@@ -78,10 +120,10 @@ if __name__ == '__main__':
         currently_running = True
 
         # Processing loop
-        while currently_running is True:
+        while currently_running:
             print("Type (I)nput to select a file "
                   "or (Q)uit to exit the program:")
-            selection = input("")
+            selection = input(">")
 
             if selection.lower() in acceptable_exit_answers:
                 sys.exit("Program exited by user")
@@ -119,15 +161,18 @@ if __name__ == '__main__':
 
                 # When user cancels file selection, tk returns empty string.
                 if current_selected_file == "":
-                    print("User canceled file operation,"
-                          " returning to main menu.\n")
+                    print("User canceled file operation, "
+                          "returning to main menu.\n")
                     continue
 
                 # Initiates confirmation session
                 end_session = False
-                while end_session is False:
-                    user_warning = input("\nYou selected \"{file}\" for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
-                        file=os.path.basename(current_selected_file)))
+                while not end_session:
+                    print("\nYou selected \"{file}\" for formating, "
+                          "is this (OK)? Or type (C)ancel to cancel. \n"
+                          .format(file=os.path.basename
+                                  (current_selected_file)))
+                    user_warning = input(">")
 
                     if user_warning.lower() == "ok":
                         try:
