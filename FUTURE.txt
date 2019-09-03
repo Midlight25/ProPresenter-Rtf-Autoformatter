@@ -1,0 +1,4 @@
+1. A GUI using PyQT
+2. Redo command-line interface with Argparse library
+3. Add default directory support for Linux
+4. Create the correct exceptions for the program so that flake8 gets off my ass.
