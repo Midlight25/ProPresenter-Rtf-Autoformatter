@@ -27,13 +27,13 @@ def auto_format_rtf(file_path, debug=False):
         with open(file_path, "r") as file:
             text_data = file.read()
         if debug:
-            print("    Opened file and read data to text_data.")
+            print("    Successfully read data")
 
         # Formats data and adds it to list for appending.
         # The double line will only be read as one by python.
         new_text_data = text_data.replace("\\line", "\\par")
         if debug:
-            print("    Formatted data")
+            print("    Data format operation successful")
 
         # Creates new file name and path from original file data.
         file_location = os.path.dirname(file_path)
@@ -75,30 +75,30 @@ if __name__ == '__main__':
     if args.files is not None:
         for file in args.files:
             if os.path.exists(file):
-                print("Modifiying file \"{filename}\".\n"
+                print("Modifiying file \"{filename}\"."
                       .format(filename=file))
 
                 if not args.confirm:
                     descision = None
                     while descision is None:
-                        print("Are you sure you would like to modify "
+                        print("\nAre you sure you would like to modify "
                               "\"{filename}\"? Please confirm. \n"
                               "(y/n)?".format(filename=file))
                         selection = input(">")
 
                         if selection == "n":
-                            print("User canceled processing on \"{filename}\"."
-                                  "\n"
+                            print("\nUser canceled processing on "
+                                  "\"{filename}\".\n"
                                   .format(filename=file))
                             descision = False
 
                         elif selection == "y":
-                            print("Recieved go-ahead for \"{filename}\".\n"
+                            print("\nRecieved go-ahead for \"{filename}\"."
                                   .format(filename=file))
                             descision = True
 
                         else:
-                            print("Invalid Selection, please try again. \n")
+                            print("\nInvalid Selection, please try again. \n")
 
                     if not descision:
                         continue
