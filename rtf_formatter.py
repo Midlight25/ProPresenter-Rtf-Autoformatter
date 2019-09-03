@@ -83,11 +83,12 @@ if __name__ == '__main__':
 
                         if selection == "n":
                             print("User canceled processing on \"{filename}\"."
+                                  "\n"
                                   .format(filename=file))
                             descision = False
 
                         elif selection == "y":
-                            print("Recieved go-ahead for \"{filename}\"."
+                            print("Recieved go-ahead for \"{filename}\".\n"
                                   .format(filename=file))
                             descision = True
 
@@ -107,6 +108,8 @@ if __name__ == '__main__':
             else:
                 print("\"{file_path}\" does not exist."
                       .format(file_path=file))
+
+    print("Instance terminated without any issues.")
 
     # Starts the CLI Environment - will rework with Argparse library
     else:
