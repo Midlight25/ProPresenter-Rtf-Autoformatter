@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
     # If script is passed to commandline w/ arguments
     # interates through the list of arguments and applies function as it goes.
-    if args.files is list():
+    if args.files is not None:
         for file in args.files:
             if not args.confirm:
                 descision = None
@@ -87,7 +87,7 @@ if __name__ == '__main__':
                     else:
                         print("Invalid Selection, please try again. \n")
 
-                if not decision:
+                if not descision:
                     continue
 
             if os.path.exists(file):
