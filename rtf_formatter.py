@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
     # If script is passed to commandline w/ arguments
     # interates through the list of arguments and applies function as it goes.
-    if args.file is list():
+    if args.files is list():
         for file in args.files:
             if not args.confirm:
                 descision = None
@@ -76,7 +76,20 @@ if __name__ == '__main__':
                           "\"{filename}\"? Please confirm. \n"
                           "(y/n)?".format(filename=file))
                     selection = input(">")
-                    if selection
+                    if selection == "n":
+                        print("User canceled processing on \"{filename}\"."
+                              .format(filename=file))
+                        descision = False
+                    elif selection == "y":
+                        print("Recieved go-ahead for \"{filename}\"."
+                              .format(filename=file))
+                        descision = True
+                    else:
+                        print("Invalid Selection, please try again. \n")
+
+                if not decision:
+                    continue
+
             if os.path.exists(file):
                 print("Modifiying file \"{filename}\".\n"
                       .format(filename=file))
@@ -149,7 +162,7 @@ if __name__ == '__main__':
 
                 # Initiates confirmation session
                 end_session = False
-                while end_session is False:
+                while not end_session:
                     user_warning = input("\nYou selected \"{file}\" for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
                         file=os.path.basename(current_selected_file)))
 
