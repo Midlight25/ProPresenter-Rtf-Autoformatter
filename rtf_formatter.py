@@ -20,34 +20,34 @@ def auto_format_rtf(file_path, debug=False):
         if debug:
             print("\nFile Operation Confirmed".format(
                 file_path=file_path))
-            print("Modifiying \"{file_name}{file_ext}\".".format(
-                file_name=file_name, file_ext=file_ext))
+            print("    Modifiying \"{filename}\".".format(
+                filename=os.path.basename(file_path)))
 
         # Opens file and copies data to text_data.
         with open(file_path, "r") as file:
             text_data = file.read()
         if debug:
-            print("Opened file and read data to text_data.")
+            print("    Opened file and read data to text_data.")
 
         # Formats data and adds it to list for appending.
         # The double line will only be read as one by python.
         new_text_data = text_data.replace("\\line", "\\par")
         if debug:
-            print("Formatted data")
+            print("    Formatted data")
 
         # Creates new file name and path from original file data.
         file_location = os.path.dirname(file_path)
         new_file_name = file_name + " MODIFIED" + file_ext
         new_file = os.path.join(file_location, new_file_name)
         if debug:
-            print("Created new file name, new file at \"{new_file}\"."
+            print("    Created new file at \"{new_file}\"."
                   .format(new_file=new_file))
 
         # Writes data to new file
         with open(new_file, "w+") as file:
             file.write(new_text_data)
         if debug:
-            print("Wrote data to \"{new_file_name}\".\n"
+            print("    Wrote data to \"{new_file_name}\".\n"
                   .format(new_file_name=new_file_name))
 
     return new_file
