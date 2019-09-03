@@ -67,6 +67,7 @@ if __name__ == '__main__':
                 print(
                     "\"{file_path}\" does not exist, file not created.".format(
                         file_path=arg))
+                print("This does not concern you.")
 
     # Starts the CLI Environment - will rework with Argparse library
     else:
