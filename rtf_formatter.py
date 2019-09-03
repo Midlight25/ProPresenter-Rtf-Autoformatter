@@ -121,7 +121,7 @@ if __name__ == '__main__':
         while currently_running:
             print("Type (I)nput to select a file "
                   "or (Q)uit to exit the program:")
-            selection = input("")
+            selection = input(">")
 
             if selection.lower() in acceptable_exit_answers:
                 sys.exit("Program exited by user")
@@ -166,8 +166,9 @@ if __name__ == '__main__':
                 # Initiates confirmation session
                 end_session = False
                 while not end_session:
-                    user_warning = input("\nYou selected \"{file}\" for formating, is this (OK)? Or type (C)ancel to cancel:\n".format(
+                    print("\nYou selected \"{file}\" for formating, is this (OK)? Or type (C)ancel to cancel. \n".format(
                         file=os.path.basename(current_selected_file)))
+                    user_warning = input(">")
 
                     if user_warning.lower() == "ok":
                         try:
