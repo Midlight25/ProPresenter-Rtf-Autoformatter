@@ -118,7 +118,7 @@ if __name__ == '__main__':
 
     # Starts the CLI Environment - will rework with Argparse library
     else:
-        print("\nProPresenter RTF Autoformatter © Midlight25 2019\n")
+        print("\nProPresenter RTF Autoformatter ©Midlight25 2019\n")
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
         acceptable_cancel_answers = ["cancel", "c"]
@@ -174,7 +174,7 @@ if __name__ == '__main__':
                 end_session = False
                 while not end_session:
                     print("\nYou selected \"{file}\" for formating, "
-                          "is this (OK)? Or type (C)ancel to cancel. \n"
+                          "is this (OK)? Or type (C)ancel to cancel."
                           .format(file=os.path.basename
                                   (current_selected_file)))
                     user_warning = input(">")
@@ -184,19 +184,19 @@ if __name__ == '__main__':
                             auto_format_rtf(current_selected_file, debug=True)
                             end_session = True
                         except:
-                            print("Program was unable to create new file,"
+                            print("\nProgram was unable to create new file,"
                                   " please try again.\n")
                             end_session = True
 
                     elif user_warning.lower() in acceptable_cancel_answers:
-                        print("User canceled operation.")
+                        print("\nUser canceled operation.")
                         end_session = True
 
                     else:
-                        print("Unable to understand user input, "
+                        print("\nUnable to understand user input, "
                               "please try again.")
 
             else:
                 print("Did not understand user input. Please try again\n")
 
-        sys.exit("System crashed.")
+        sys.exit("\nSystem crashed.")
