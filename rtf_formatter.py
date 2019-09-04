@@ -212,7 +212,7 @@ if __name__ == '__main__':
 
                     # Cancels operation if user requests it.
                     elif user_warning.lower() in acceptable_cancel_answers:
-                        print("\nUser canceled operation.")
+                        print("\nUser canceled operation. \n")
                         confirm = False
 
                     # Trys again if user gives invalid answer.
@@ -221,6 +221,6 @@ if __name__ == '__main__':
 
             # Asks user to try again on the "input, quit" selection.
             else:
-                print("Invalid Input,  please try again\n")
+                print("\nInvalid Input,  please try again\n")
 
         sys.exit("\nSystem crashed.")
