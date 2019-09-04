@@ -6,13 +6,12 @@ from tkinter import Tk
 
 
 def auto_format_rtf(file_path, debug=False):
-    """Takes in complete filepath as input and replaces all
-        line breaks with paragraph breaks and writes to
-        file with filename + "MODIFIED"
-    returns the new file path
+    """ Input complete filepath to .rtf file
+        replaces all instances of "\\line" to "\\par".
+        writes new data to new file with "MODFIED" appended.
+        Prints debug messages to console if debug=True.
     """
-    # Gets file name and extension for creation of new file name and path
-    # It's here because the next if statement checks if this file is an ".rtf"
+    # Separates file name and extension for processing later.
     file_name, file_ext = os.path.splitext(os.path.basename(file_path))
 
     # Verifies that file exists and is .rtf before starting
@@ -23,38 +22,42 @@ def auto_format_rtf(file_path, debug=False):
             print("    Modifiying \"{filename}\".".format(
                 filename=os.path.basename(file_path)))
 
-        # Opens file and copies data to text_data.
+        # Opens file and copies data to text_data object.
         with open(file_path, "r") as file:
             text_data = file.read()
         if debug:
             print("    Successfully read data")
 
-        # Formats data and adds it to list for appending.
-        # The double line will only be read as one by python.
+        # Replaces the unwanted "\\line" with "\\par"
+        # Operation performed on the entire data set instead of line by line.
         new_text_data = text_data.replace("\\line", "\\par")
         if debug:
             print("    Data format operation successful")
 
-        # Creates new file name and path from original file data.
+        # Gets location of file
         file_location = os.path.dirname(file_path)
-        new_file_name = file_name + " MODIFIED" + file_ext
-        new_file = os.path.join(file_location, new_file_name)
-        if debug:
-            print("    Created new file at \"{new_file}\"."
-                  .format(new_file=new_file))
 
-        # Writes data to new file
+        # Creates new file name from original name.
+        new_file_name = file_name + " MODIFIED" + file_ext
+
+        # Creates new complete file path from new name and original path.
+        new_file = os.path.join(file_location, new_file_name)
+
+        # Creates new file @ new path and writes data to new file.
         with open(new_file, "w+") as file:
             file.write(new_text_data)
-        if debug:
-            print("    Wrote data to \"{new_file_name}\".\n"
-                  .format(new_file_name=new_file_name))
+            if debug:
+                print("    Created new file at \"{new_file}\"."
+                      .format(new_file=new_file))
+                print("    Wrote data to \"{new_file_name}\".\n"
+                      .format(new_file_name=new_file_name))
 
     return new_file
 
 
 if __name__ == '__main__':
 
+    # Initializes parser for commandline call and sets flags.
     parser = argparse.ArgumentParser(description="Formats .rtf files for use "
                                      "with ProPresenter6 import function. "
                                      "Or optionally, you can run without "
@@ -70,17 +73,23 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # If script is passed to commandline w/ arguments
-    # interates through the list of arguments and applies function as it goes.
+    # If script is called from the commandline and supplied arguments.
+    # Iterates through arguments, applying processing as it goes.
     if args.files is not None:
         for file in args.files:
+
+            # Checks to see if the file exists.
             if os.path.exists(file):
                 print("Modifiying file \"{filename}\"."
                       .format(filename=file))
-
+                # If the "confirm all" flag is not raised, will ask for user
+                # confirmation for each file before processing is applied.
                 if not args.confirm:
-                    descision = None
-                    while descision is None:
+
+                    # Starts decision loop
+                    # User must give valid answer for loop to exit.
+                    confirmation = None
+                    while confirmation is None:
                         print("\nAre you sure you would like to modify "
                               "\"{filename}\"? Please confirm. \n"
                               "(y/n)?".format(filename=file))
@@ -90,50 +99,63 @@ if __name__ == '__main__':
                             print("\nUser canceled processing on "
                                   "\"{filename}\".\n"
                                   .format(filename=file))
-                            descision = False
+                            confirmation = False
 
                         elif selection == "y":
                             print("\nRecieved go-ahead for \"{filename}\"."
                                   .format(filename=file))
-                            descision = True
+                            confirmation = True
 
                         else:
                             print("\nInvalid Selection, please try again. \n")
 
-                    if not descision:
+                    # If user selects no for this file,
+                    # the program will continue on to the next file.
+                    if not confirmation:
                         continue
 
+                # Performs formatting on file with debugging enabled.
                 new_file_path = auto_format_rtf(file, debug=True)
+
+                # Checks if file was really created.
                 if os.path.exists(new_file_path):
                     print("New file created @ \"{file_path}\".\n"
                           .format(file_path=new_file_path))
                 else:
                     print("Error creating new file.\n")
 
+            # If file was not valid for program.
             else:
                 print("\"{file_path}\" does not exist."
                       .format(file_path=file))
 
+        # End of program.
         print("Instance terminated without any issues.")
 
-    # Starts the CLI Environment - will rework with Argparse library
+    # Starts the interactive CLI when script
+    # is called from the commandline with no arguments
     else:
         print("\nProPresenter RTF Autoformatter ©Midlight25 2019\n")
+
+        # Defining choices for use in CLI.
         acceptable_exit_answers = ["quit", "q"]
         acceptable_input_answers = ["input", "i"]
         acceptable_cancel_answers = ["cancel", "c"]
         currently_running = True
 
-        # Processing loop
+        # Starts program loop with currently_running.
         while currently_running:
             print("Type (I)nput to select a file "
                   "or (Q)uit to exit the program:")
             selection = input(">")
 
+            # Exit program if quit is passed to the CLI
             if selection.lower() in acceptable_exit_answers:
                 sys.exit("Program exited by user")
 
+            # Starts file input dialog
             elif selection.lower() in acceptable_input_answers:
+
                 # Removes an extra window that appears
                 # when the file dialog activates
                 root = Tk()
@@ -141,8 +163,8 @@ if __name__ == '__main__':
 
                 # Opens Documents Directory on Windows
                 if sys.platform.startswith('win32'):
-                    default_directory = os.path.join(os.getenv('USERPROFILE'),
-                                                     "Documents")
+                    default_directory = os.path.join(
+                        os.getenv('USERPROFILE'), "Documents")
                     current_selected_file = fdialog.askopenfilename(
                         initialdir=default_directory,
                         title="Select file",
@@ -171,32 +193,34 @@ if __name__ == '__main__':
                     continue
 
                 # Initiates confirmation session
-                end_session = False
-                while not end_session:
+                confirm = None
+                while confirm is None:
                     print("\nYou selected \"{file}\" for formating, "
                           "is this (OK)? Or type (C)ancel to cancel."
                           .format(file=os.path.basename
                                   (current_selected_file)))
                     user_warning = input(">")
 
+                    # Performs processing if user gives the ok.
                     if user_warning.lower() == "ok":
                         try:
                             auto_format_rtf(current_selected_file, debug=True)
-                            end_session = True
                         except:
                             print("\nProgram was unable to create new file,"
                                   " please try again.\n")
-                            end_session = True
+                        confirm = True
 
+                    # Cancels operation if user requests it.
                     elif user_warning.lower() in acceptable_cancel_answers:
-                        print("\nUser canceled operation.")
-                        end_session = True
+                        print("\nUser canceled operation. \n")
+                        confirm = False
 
+                    # Trys again if user gives invalid answer.
                     else:
-                        print("\nUnable to understand user input, "
-                              "please try again.")
+                        print("\nInvalid Input, please try again.")
 
+            # Asks user to try again on the "input, quit" selection.
             else:
-                print("Did not understand user input. Please try again\n")
+                print("\nInvalid Input,  please try again\n")
 
         sys.exit("\nSystem crashed.")
