@@ -201,22 +201,25 @@ if __name__ == '__main__':
                                   (current_selected_file)))
                     user_warning = input(">")
 
+                    # Performs processing if user gives the ok.
                     if user_warning.lower() == "ok":
                         try:
                             auto_format_rtf(current_selected_file, debug=True)
-
                         except:
                             print("\nProgram was unable to create new file,"
                                   " please try again.\n")
                         confirm = True
 
+                    # Cancels operation if user requests it.
                     elif user_warning.lower() in acceptable_cancel_answers:
                         print("\nUser canceled operation.")
                         confirm = False
 
+                    # Trys again if user gives invalid answer.
                     else:
                         print("\nInvalid Input, please try again.")
 
+            # Asks user to try again on the "input, quit" selection.
             else:
                 print("Invalid Input,  please try again\n")
 
