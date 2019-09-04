@@ -193,8 +193,8 @@ if __name__ == '__main__':
                     continue
 
                 # Initiates confirmation session
-                end_session = False
-                while not end_session:
+                confirm = None
+                while confirm is None:
                     print("\nYou selected \"{file}\" for formating, "
                           "is this (OK)? Or type (C)ancel to cancel."
                           .format(file=os.path.basename
@@ -204,21 +204,20 @@ if __name__ == '__main__':
                     if user_warning.lower() == "ok":
                         try:
                             auto_format_rtf(current_selected_file, debug=True)
-                            end_session = True
+
                         except:
                             print("\nProgram was unable to create new file,"
                                   " please try again.\n")
-                            end_session = True
+                        confirm = True
 
                     elif user_warning.lower() in acceptable_cancel_answers:
                         print("\nUser canceled operation.")
-                        end_session = True
+                        confirm = False
 
                     else:
-                        print("\nUnable to understand user input, "
-                              "please try again.")
+                        print("\nInvalid Input, please try again.")
 
             else:
-                print("Did not understand user input. Please try again\n")
+                print("Invalid Input,  please try again\n")
 
         sys.exit("\nSystem crashed.")
