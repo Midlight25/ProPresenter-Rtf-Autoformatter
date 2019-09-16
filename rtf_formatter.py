@@ -4,6 +4,8 @@ import argparse
 from tkinter import filedialog as fdialog
 from tkinter import Tk
 
+print("initCommit")
+
 
 def auto_format_rtf(file_path, debug=False):
     """ Input complete filepath to .rtf file
