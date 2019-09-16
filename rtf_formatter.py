@@ -19,8 +19,7 @@ def auto_format_rtf(file_path, debug=False):
         if debug:
             print("\nFile Operation Confirmed".format(
                 file_path=file_path))
-            print("    Modifiying \"{filename}\".".format(
-                filename=os.path.basename(file_path)))
+            print(f"    Modifiying \"{os.path.basename(file_path)}\".")
 
         # Opens file and copies data to text_data object.
         with open(file_path, "r") as file:
@@ -47,10 +46,8 @@ def auto_format_rtf(file_path, debug=False):
         with open(new_file, "w+") as file:
             file.write(new_text_data)
             if debug:
-                print("    Created new file at \"{new_file}\"."
-                      .format(new_file=new_file))
-                print("    Wrote data to \"{new_file_name}\".\n"
-                      .format(new_file_name=new_file_name))
+                print(f"    Created new file at \"{new_file}\".")
+                print(f"    Wrote data to \"{new_file_name}\".\n")
 
     return new_file
 
