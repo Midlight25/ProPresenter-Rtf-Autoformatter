@@ -184,11 +184,10 @@ if __name__ == '__main__':
 
                 # Initiates confirmation session
                 confirm = None
+                file = os.path.basename(current_selected_file)
                 while confirm is None:
-                    print("\nYou selected \"{file}\" for formating, "
-                          "is this (OK)? Or type (C)ancel to cancel."
-                          .format(file=os.path.basename
-                                  (current_selected_file)))
+                    print(f"\nYou selected \"{file}\" for formating, "
+                          "is this (OK)? Or type (C)ancel to cancel.")
                     user_warning = input(">")
 
                     # Performs processing if user gives the ok.
