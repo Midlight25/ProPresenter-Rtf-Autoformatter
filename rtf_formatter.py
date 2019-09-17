@@ -76,8 +76,7 @@ if __name__ == '__main__':
 
             # Checks to see if the file exists.
             if os.path.exists(file):
-                print("Modifiying file \"{filename}\"."
-                      .format(filename=file))
+                print(f"Modifiying file \"{file}\".")
                 # If the "confirm all" flag is not raised, will ask for user
                 # confirmation for each file before processing is applied.
                 if not args.confirm:
@@ -87,19 +86,16 @@ if __name__ == '__main__':
                     confirmation = None
                     while confirmation is None:
                         print("\nAre you sure you would like to modify "
-                              "\"{filename}\"? Please confirm. \n"
-                              "(y/n)?".format(filename=file))
+                              f"\"{file}\"? Please confirm. \n(y/n)?")
                         selection = input(">")
 
                         if selection == "n":
-                            print("\nUser canceled processing on "
-                                  "\"{filename}\".\n"
-                                  .format(filename=file))
+                            print(f"\nUser canceled processing on \"{file}\"."
+                                  "\n")
                             confirmation = False
 
                         elif selection == "y":
-                            print("\nRecieved go-ahead for \"{filename}\"."
-                                  .format(filename=file))
+                            print(f"\nRecieved go-ahead for \"{file}\".")
                             confirmation = True
 
                         else:
@@ -115,15 +111,13 @@ if __name__ == '__main__':
 
                 # Checks if file was really created.
                 if os.path.exists(new_file_path):
-                    print("New file created @ \"{file_path}\".\n"
-                          .format(file_path=new_file_path))
+                    print(f"New file created @ \"{new_file_path}\".\n")
                 else:
                     print("Error creating new file.\n")
 
             # If file was not valid for program.
             else:
-                print("\"{file_path}\" does not exist."
-                      .format(file_path=file))
+                print(f"\"{file}\" does not exist.")
 
         # End of program.
         print("Instance terminated without any issues.")
