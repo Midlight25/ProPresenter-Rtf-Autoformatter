@@ -17,8 +17,7 @@ def auto_format_rtf(file_path, debug=False):
     # Verifies that file exists and is .rtf before starting
     if os.path.exists(file_path) and file_ext == ".rtf":
         if debug:
-            print("\nFile Operation Confirmed".format(
-                file_path=file_path))
+            print("\nFile Operation Confirmed")
             print(f"    Modifiying \"{os.path.basename(file_path)}\".")
 
         # Opens file and copies data to text_data object.
