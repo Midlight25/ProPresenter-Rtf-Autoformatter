@@ -53,8 +53,11 @@ def auto_format_rtf(file_path, debug=False):
 class prog_GUI:
     def __init__(self, master):
         self.master = master
-        master.title("ProPresenter Auto Formatter")
+        self.master.title("ProPresenter Auto Formatter")
         frame_width = 475
+
+        self.preview_var = StringVar()
+        self.preview_var.set("No File Selected")
 
         self.selection_frame = Frame(self.master, bg="red", width=frame_width, height=50)
         self.selection_frame.place(relx=0.5, rely=0.07, anchor=CENTER)
@@ -65,8 +68,12 @@ class prog_GUI:
         self.confirm_frame = Frame(self.master, bg="green", width=frame_width, height=50)
         self.confirm_frame.place(relx=0.5, rely=0.93, anchor=CENTER)
 
-    def greet(self):
-        print("Greetings!")
+        self.preview_label = Label(self.preview_frame, text="File Preview:", font=("Helvetica", 14), anchor=W, justify=LEFT)
+        self.preview_label.place(relx=0.15, rely=0.1, anchor=CENTER)
+
+        self.preview_window = Label(self.preview_frame, textvariable=self.preview_var, font=("Helvetica", 14), justify=LEFT, width=frame_width-20, height=300)
+        # self.preview_window.place(relx=0.5, rely=0.461, anchor=CENTER)
+
 
 
 if __name__ == '__main__':
@@ -145,6 +152,7 @@ if __name__ == '__main__':
     else:
         root = Tk()
         root.geometry("500x450")
+        root.resizable(0,0)
         gui = prog_GUI(root)
         root.mainloop()
 """
