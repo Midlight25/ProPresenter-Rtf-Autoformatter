@@ -106,5 +106,8 @@ venv.bak/
 
 # Test files
 /test.rtf
+/test\ MODIFIED.rtf
 /testfile.txt
 /new_test.rtf
+/Test_File.rtf
+/Test_file\ MODIFIED.rtf
