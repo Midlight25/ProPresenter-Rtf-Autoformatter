@@ -17,20 +17,21 @@ def auto_format_rtf(file_path, debug=False):
     # Verifies that file exists and is .rtf before starting
     if os.path.exists(file_path) and file_ext == ".rtf":
         if debug:
-            print("\nFile Operation Confirmed")
-            print(f"    Modifiying \"{os.path.basename(file_path)}\".")
+            print("\n")
+            print("File Operation Confirmed")
+            print(f"\tModifiying \"{file_name}.{file_ext}\".")
 
         # Opens file and copies data to text_data object.
         with open(file_path, "r") as file:
             text_data = file.read()
         if debug:
-            print("    Successfully read data")
+            print("\tSuccessfully read data")
 
         # Replaces the unwanted "\\line" with "\\par"
         # Operation performed on the entire data set instead of line by line.
         new_text_data = text_data.replace("\\line", "\\par")
         if debug:
-            print("    Data format operation successful")
+            print("\tData format operation successful")
 
         # Gets location of file
         file_location = os.path.dirname(file_path)
@@ -45,8 +46,8 @@ def auto_format_rtf(file_path, debug=False):
         with open(new_file, "w+") as file:
             file.write(new_text_data)
             if debug:
-                print(f"    Created new file at \"{new_file}\".")
-                print(f"    Wrote data to \"{new_file_name}\".\n")
+                print(f"\tCreated new file at \"{new_file}\".")
+                print(f"\tWrote data to \"{new_file_name}\".\n")
 
     return new_file
 
