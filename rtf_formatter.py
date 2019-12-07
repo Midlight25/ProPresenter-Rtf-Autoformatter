@@ -1,8 +1,8 @@
 import os
-import sys
+# import sys
 import argparse
 # from tkinter import filedialog as fdialog
-from tkinter import *
+import tkinter as tk
 
 
 def auto_format_rtf(file_path, debug=False):
@@ -50,30 +50,38 @@ def auto_format_rtf(file_path, debug=False):
 
     return new_file
 
+
 class prog_GUI:
     def __init__(self, master):
         self.master = master
         self.master.title("ProPresenter Auto Formatter")
         frame_width = 475
 
-        self.preview_var = StringVar()
+        self.preview_var = tk.StringVar()
         self.preview_var.set("No File Selected")
 
-        self.selection_frame = Frame(self.master, bg="red", width=frame_width, height=50)
-        self.selection_frame.place(relx=0.5, rely=0.07, anchor=CENTER)
+        self.selection_frame = tk.Frame(
+            self.master, bg="red", width=frame_width, height=50)
+        self.selection_frame.place(relx=0.5, rely=0.07, anchor="center")
 
-        self.preview_frame = Frame(self.master, bg="blue", width=frame_width, height=325)
-        self.preview_frame.place(relx=0.5, rely=0.5, anchor=CENTER)
+        self.preview_frame = tk.Frame(
+            self.master, bg="blue", width=frame_width, height=325)
+        self.preview_frame.place(relx=0.5, rely=0.5, anchor="center")
 
-        self.confirm_frame = Frame(self.master, bg="green", width=frame_width, height=50)
-        self.confirm_frame.place(relx=0.5, rely=0.93, anchor=CENTER)
+        self.confirm_frame = tk.Frame(
+            self.master, bg="green", width=frame_width, height=50)
+        self.confirm_frame.place(relx=0.5, rely=0.93, anchor="center")
 
-        self.preview_label = Label(self.preview_frame, text="File Preview:", font=("Helvetica", 14), anchor=W, justify=LEFT)
-        self.preview_label.place(relx=0.15, rely=0.1, anchor=CENTER)
+        self.preview_label = tk.Label(self.preview_frame, text="File Preview:",
+                                      font=("Helvetica", 14), anchor="w",
+                                      justify="left")
+        self.preview_label.place(relx=0.15, rely=0.1, anchor="center")
 
-        self.preview_window = Label(self.preview_frame, textvariable=self.preview_var, font=("Helvetica", 14), justify=LEFT, width=frame_width-20, height=300)
-        # self.preview_window.place(relx=0.5, rely=0.461, anchor=CENTER)
-
+        self.preview_window = tk.Label(self.preview_frame,
+                                       textvariable=self.preview_var,
+                                       font=("Helvetica", 14), justify="left",
+                                       width=frame_width-20, height=300)
+        # self.preview_window.place(relx=0.5, rely=0.461, anchor="center")
 
 
 if __name__ == '__main__':
@@ -150,9 +158,9 @@ if __name__ == '__main__':
     # Starts the interactive CLI when script
     # is called from the commandline with no arguments
     else:
-        root = Tk()
+        root = tk.Tk()
         root.geometry("500x450")
-        root.resizable(0,0)
+        root.resizable(0, 0)
         gui = prog_GUI(root)
         root.mainloop()
 """
