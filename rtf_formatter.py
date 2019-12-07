@@ -17,7 +17,6 @@ def auto_format_rtf(file_path, debug=False):
     # Verifies that file exists and is .rtf before starting
     if os.path.exists(file_path) and file_ext == ".rtf":
         if debug:
-            print("\n")
             print("File Operation Confirmed")
             print(f"\tModifiying \"{file_name}.{file_ext}\".")
 
@@ -126,7 +125,8 @@ if __name__ == '__main__':
     # Starts the interactive CLI when script
     # is called from the commandline with no arguments
     else:
-        print("\nProPresenter RTF Autoformatter ©Midlight25 2019\n")
+        print("")
+        print("ProPresenter RTF Autoformatter ©Midlight25 2019\n")
 
         # Defining choices for use in CLI.
         acceptable_exit_answers = ["quit", "q"]
@@ -139,6 +139,7 @@ if __name__ == '__main__':
             print("Type (I)nput to select a file "
                   "or (Q)uit to exit the program:")
             selection = input(">")
+            print("")
 
             # Exit program if quit is passed to the CLI
             if selection.lower() in acceptable_exit_answers:
@@ -187,31 +188,32 @@ if __name__ == '__main__':
                 confirm = None
                 file = os.path.basename(current_selected_file)
                 while confirm is None:
-                    print(f"\nYou selected \"{file}\" for formating, "
-                          "is this (OK)? Or type (C)ancel to cancel.")
+                    print(f"You selected \"{file}\" for formating, "
+                          "is this (OK)? Or type (C)ancel to cancel")
                     user_warning = input(">")
+                    print("")
 
                     # Performs processing if user gives the ok.
                     if user_warning.lower() == "ok":
                         try:
                             auto_format_rtf(current_selected_file, debug=True)
                         except:
-                            print("\nProgram was unable to create new file,"
+                            print("Program was unable to create new file,"
                                   " please try again.\n")
                         confirm = True
 
                     # Cancels operation if user requests it.
                     elif user_warning.lower() in acceptable_cancel_answers:
-                        print("\nUser canceled operation. \n")
+                        print("User canceled operation.\n")
                         confirm = False
 
                     # Trys again if user gives invalid answer.
                     else:
-                        print("\nInvalid Input, please try again.")
+                        print("Invalid Input, please try again.\n")
 
             # Asks user to try again on the "input, quit" selection.
             else:
-                print("\nInvalid Input,  please try again\n")
+                print("Invalid Input,  please try again\n")
 
         # Signed Midlight25 2019
-        sys.exit("\nSystem crashed.")
+        sys.exit("System crashed.")
