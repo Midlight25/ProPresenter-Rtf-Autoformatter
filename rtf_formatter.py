@@ -6,8 +6,8 @@ from tkinter import Tk
 
 
 def auto_format_rtf(file_path, debug=False):
-    """ Input complete filepath to .rtf file
-        replaces all instances of "\\line" to "\\par".
+    r""" Input complete filepath to .rtf file
+        replaces all instances of "\line" to "\par".
         writes new data to new file with "MODFIED" appended.
         Prints debug messages to console if debug=True.
     """
@@ -29,7 +29,7 @@ def auto_format_rtf(file_path, debug=False):
 
         # Replaces the unwanted "\\line" with "\\par"
         # Operation performed on the entire data set instead of line by line.
-        new_text_data = text_data.replace("\\line", "\\par")
+        new_text_data = text_data.replace(r"\line", r"\par")
         if debug:
             print("\tData format operation successful")
 
