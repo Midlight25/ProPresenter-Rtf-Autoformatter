@@ -104,6 +104,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# VS Code Files
+/.vscode
+
 # Test files
 /test.rtf
 /test\ MODIFIED.rtf
