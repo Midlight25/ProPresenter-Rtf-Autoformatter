@@ -125,34 +125,9 @@ if __name__ == '__main__':
     # Starts the interactive CLI when script
     # is called from the commandline with no arguments
     else:
-        print("")
-        print("ProPresenter RTF Autoformatter ©Midlight25 2019\n")
+        
 
-        # Defining choices for use in CLI.
-        acceptable_exit_answers = ["quit", "q"]
-        acceptable_input_answers = ["input", "i"]
-        acceptable_cancel_answers = ["cancel", "c"]
-        currently_running = True
-
-        # Starts program loop with currently_running.
-        while currently_running:
-            print("Type (I)nput to select a file "
-                  "or (Q)uit to exit the program:")
-            selection = input(">")
-            print("")
-
-            # Exit program if quit is passed to the CLI
-            if selection.lower() in acceptable_exit_answers:
-                sys.exit("Program exited by user")
-
-            # Starts file input dialog
-            elif selection.lower() in acceptable_input_answers:
-
-                # Removes an extra window that appears
-                # when the file dialog activates
-                root = Tk()
-                root.withdraw()
-
+"""
                 # Opens Documents Directory on Windows
                 if sys.platform.startswith('win32'):
                     default_directory = os.path.join(
@@ -170,50 +145,4 @@ if __name__ == '__main__':
                         initialdir=default_directory,
                         title="Select file",
                         filetypes=[("Rich Text Format files", "*.rtf")])
-
-                # Any Unrecognized OS - Need to add Linux support
-                else:
-                    current_selected_file = fdialog.askopenfilename(
-                        initialdir="/",
-                        title="Select file",
-                        filetypes=[("Rich Text Format files", "*.rtf")])
-
-                # When user cancels file selection, tk returns empty string.
-                if current_selected_file == "":
-                    print("User canceled file operation, "
-                          "returning to main menu.\n")
-                    continue
-
-                # Initiates confirmation session
-                confirm = None
-                file = os.path.basename(current_selected_file)
-                while confirm is None:
-                    print(f"You selected \"{file}\" for formating, "
-                          "is this (OK)? Or type (C)ancel to cancel")
-                    user_warning = input(">")
-                    print("")
-
-                    # Performs processing if user gives the ok.
-                    if user_warning.lower() == "ok":
-                        try:
-                            auto_format_rtf(current_selected_file, debug=True)
-                        except:
-                            print("Program was unable to create new file,"
-                                  " please try again.\n")
-                        confirm = True
-
-                    # Cancels operation if user requests it.
-                    elif user_warning.lower() in acceptable_cancel_answers:
-                        print("User canceled operation.\n")
-                        confirm = False
-
-                    # Trys again if user gives invalid answer.
-                    else:
-                        print("Invalid Input, please try again.\n")
-
-            # Asks user to try again on the "input, quit" selection.
-            else:
-                print("Invalid Input,  please try again\n")
-
-        # Signed Midlight25 2019
-        sys.exit("System crashed.")
+"""
