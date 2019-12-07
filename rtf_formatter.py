@@ -1,8 +1,8 @@
 import os
 import sys
 import argparse
-from tkinter import filedialog as fdialog
-from tkinter import Tk
+# from tkinter import filedialog as fdialog
+from tkinter import *
 
 
 def auto_format_rtf(file_path, debug=False):
@@ -49,6 +49,24 @@ def auto_format_rtf(file_path, debug=False):
                 print(f"\tWrote data to \"{new_file_name}\".\n")
 
     return new_file
+
+class prog_GUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("ProPresenter Auto Formatter")
+        frame_width = 475
+
+        self.selection_frame = Frame(self.master, bg="red", width=frame_width, height=50)
+        self.selection_frame.place(relx=0.5, rely=0.07, anchor=CENTER)
+
+        self.preview_frame = Frame(self.master, bg="blue", width=frame_width, height=325)
+        self.preview_frame.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+        self.confirm_frame = Frame(self.master, bg="green", width=frame_width, height=50)
+        self.confirm_frame.place(relx=0.5, rely=0.93, anchor=CENTER)
+
+    def greet(self):
+        print("Greetings!")
 
 
 if __name__ == '__main__':
@@ -125,8 +143,10 @@ if __name__ == '__main__':
     # Starts the interactive CLI when script
     # is called from the commandline with no arguments
     else:
-        
-
+        root = Tk()
+        root.geometry("500x450")
+        gui = prog_GUI(root)
+        root.mainloop()
 """
                 # Opens Documents Directory on Windows
                 if sys.platform.startswith('win32'):
