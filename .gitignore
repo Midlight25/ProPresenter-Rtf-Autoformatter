@@ -106,6 +106,7 @@ venv.bak/
 
 # VS Code Files
 /.vscode
+*.code-workspace
 
 # Test files
 /test.rtf
