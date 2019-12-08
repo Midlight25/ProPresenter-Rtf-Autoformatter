@@ -56,17 +56,26 @@ class prog_GUI:
         self.master = master
         self.master.title("ProPresenter Auto Formatter")
         frame_width = 475
+        GUI_font = ("Helvetica", 12)
+        GUI_font_large = ("Helvetica", 14)
+
+        # Variables
 
         self.preview_var = tk.StringVar()
         self.preview_var.set("No File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File Selected")
 
+        # Frames
+        self.title_frame = tk.Frame(
+            self.master, bg="pink", width=frame_width, height=30, )
+        self.title_frame.place(relx=0.5, rely=0.05, anchor="center")
+
         self.selection_frame = tk.Frame(
             self.master, bg="red", width=frame_width, height=50)
-        self.selection_frame.place(relx=0.5, rely=0.07, anchor="center")
+        self.selection_frame.place(relx=0.5, rely=0.15, anchor="center")
 
         self.preview_frame = tk.Frame(
-            self.master, bg="blue", width=frame_width, height=325)
-        self.preview_frame.place(relx=0.5, rely=0.5, anchor="center")
+            self.master, bg="blue", width=frame_width, height=290)
+        self.preview_frame.place(relx=0.5, rely=0.54, anchor="center")
 
         self.sub_preview_frame = tk.Frame(self.preview_frame, bg="green")
         self.sub_preview_frame.place(
@@ -76,15 +85,20 @@ class prog_GUI:
             self.master, bg="green", width=frame_width, height=50)
         self.confirm_frame.place(relx=0.5, rely=0.93, anchor="center")
 
+        # Labels
+        self.title_label = tk.Label(
+            self.title_frame, text="Automatically format your files effortlessly", anchor="e", font=GUI_font, width=50, justify="right")
+        self.title_label.grid(row=1, column=2)
+
         self.preview_label = tk.Label(self.preview_frame, text="File Preview:",
-                                      font=("Helvetica", 14), anchor="w",
+                                      font=GUI_font_large, anchor="w",
                                       justify="left")
         self.preview_label.place(relx=0.15, rely=0.1, anchor="center")
 
         self.preview_window = tk.Label(
             self.sub_preview_frame, textvariable=self.preview_var)
         self.preview_window.configure(
-            anchor="nw", justify="left", font=("Helvetica", 14), wraplength=425)
+            anchor="nw", justify="left", font=GUI_font_large, wraplength=425)
         self.preview_window.pack(fill="both")
 
 
