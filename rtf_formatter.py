@@ -51,13 +51,18 @@ def auto_format_rtf(file_path, debug=False):
     return new_file
 
 
+class font:
+    def __init__(self, font_name):
+        self.med = (str(font_name), 12)
+        self.large = (str(font_name), 14)
+
+
 class prog_GUI:
     def __init__(self, master):
         self.master = master
         self.master.title("ProPresenter Auto Formatter")
         frame_width = 475
-        GUI_font = ("Helvetica", 12)
-        GUI_font_large = ("Helvetica", 14)
+        helv = font("Helvetica")
 
         # Variables
 
@@ -87,18 +92,18 @@ class prog_GUI:
 
         # Labels
         self.title_label = tk.Label(
-            self.title_frame, text="Automatically format your files effortlessly", anchor="e", font=GUI_font, width=50, justify="right")
+            self.title_frame, text="Automatically format your files effortlessly", anchor="e", font=helv.med, width=50, justify="right")
         self.title_label.grid(row=1, column=2)
 
         self.preview_label = tk.Label(self.preview_frame, text="File Preview:",
-                                      font=GUI_font_large, anchor="w",
+                                      font=helv.large, anchor="w",
                                       justify="left")
         self.preview_label.place(relx=0.15, rely=0.1, anchor="center")
 
         self.preview_window = tk.Label(
             self.sub_preview_frame, textvariable=self.preview_var)
         self.preview_window.configure(
-            anchor="nw", justify="left", font=GUI_font_large, wraplength=425)
+            anchor="nw", justify="left", font=helv.large, wraplength=425)
         self.preview_window.pack(fill="both")
 
 
