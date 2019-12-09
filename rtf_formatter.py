@@ -70,8 +70,7 @@ class prog_GUI:
         # Variables
 
         self.preview_var = tk.StringVar()
-        self.preview_var.set("No File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File SelectedNo File Selected")
-
+        self.preview_var.set("No File Selected")
         # Frames
         self.title_frame = tk.Frame(
             self.master, bg="pink", width=frame_width, height=30, )
@@ -83,13 +82,13 @@ class prog_GUI:
             relx=0.5, rely=0.15, anchor="center")
 
         self.preview_frame = tk.Frame(
-            self.master, bg="blue", width=frame_width, height=290)
-        self.preview_frame.place(relx=0.5, rely=0.54, anchor="center")
-
-        self.sub_preview_frame = tk.Frame(
-            self.preview_frame, bg="green")
-        self.sub_preview_frame.place(
-            relx=0, rely=0.25, relwidth=1, relheight=0.75)
+            self.master, bg="blue")
+        self.preview_frame.place(
+            relx=0.5,
+            rely=0.54,
+            relwidth=0.84,
+            relheight=0.62,
+            anchor="center")
 
         self.confirm_frame = tk.Frame(
             self.master, bg="green", width=frame_width, height=50)
@@ -104,22 +103,17 @@ class prog_GUI:
             width=50,)
         self.title_label.pack()
 
-        self.preview_label = tk.Label(
-            self.preview_frame,
-            text="File Preview:",
-            font=helv.large,
-            anchor="w",
-            justify="left")
-        self.preview_label.place(relx=0.15, rely=0.1, anchor="center")
-
         self.preview_window = tk.Label(
-            self.sub_preview_frame, textvariable=self.preview_var)
+            self.preview_frame,
+            textvariable=self.preview_var,
+            bg="blue")
         self.preview_window.configure(
             anchor="nw",
             justify="left",
             font=helv.large,
-            wraplength=425)
-        self.preview_window.pack(fill="both")
+            width=46,
+            wraplength=405)
+        self.preview_window.pack(fill="both", padx=10, pady=10)
 
 
 if __name__ == '__main__':
