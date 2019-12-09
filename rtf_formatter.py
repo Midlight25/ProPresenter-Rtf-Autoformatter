@@ -12,7 +12,8 @@ def auto_format_rtf(file_path, debug=False):
         Prints debug messages to console if debug=True.
     """
     # Separates file name and extension for processing later.
-    file_name, file_ext = os.path.splitext(os.path.basename(file_path))
+    file_name, file_ext = os.path.splitext(
+        os.path.basename(file_path))
 
     # Verifies that file exists and is .rtf before starting
     if os.path.exists(file_path) and file_ext == ".rtf":
@@ -27,7 +28,8 @@ def auto_format_rtf(file_path, debug=False):
             print("\tSuccessfully read data")
 
         # Replaces the unwanted "\\line" with "\\par"
-        # Operation performed on the entire data set instead of line by line.
+        # Operation performed on the entire data set instead of line
+        # by line.
         new_text_data = text_data.replace(r"\line", r"\par")
         if debug:
             print("\tData format operation successful")
@@ -38,7 +40,8 @@ def auto_format_rtf(file_path, debug=False):
         # Creates new file name from original name.
         new_file_name = file_name + " MODIFIED" + file_ext
 
-        # Creates new complete file path from new name and original path.
+        # Creates new complete file path from new name and original
+        # path.
         new_file = os.path.join(file_location, new_file_name)
 
         # Creates new file @ new path and writes data to new file.
@@ -76,13 +79,15 @@ class prog_GUI:
 
         self.selection_frame = tk.Frame(
             self.master, bg="red", width=frame_width, height=50)
-        self.selection_frame.place(relx=0.5, rely=0.15, anchor="center")
+        self.selection_frame.place(
+            relx=0.5, rely=0.15, anchor="center")
 
         self.preview_frame = tk.Frame(
             self.master, bg="blue", width=frame_width, height=290)
         self.preview_frame.place(relx=0.5, rely=0.54, anchor="center")
 
-        self.sub_preview_frame = tk.Frame(self.preview_frame, bg="green")
+        self.sub_preview_frame = tk.Frame(
+            self.preview_frame, bg="green")
         self.sub_preview_frame.place(
             relx=0, rely=0.25, relwidth=1, relheight=0.75)
 
@@ -92,33 +97,48 @@ class prog_GUI:
 
         # Labels
         self.title_label = tk.Label(
-            self.title_frame, text="Automatically format your files effortlessly", anchor="e", font=helv.med, width=50, justify="right")
+            self.title_frame,
+            text="Automatically format your files effortlessly",
+            anchor="e",
+            font=helv.med,
+            width=50,
+            justify="right")
         self.title_label.grid(row=1, column=2)
 
-        self.preview_label = tk.Label(self.preview_frame, text="File Preview:",
-                                      font=helv.large, anchor="w",
-                                      justify="left")
+        self.preview_label = tk.Label(
+            self.preview_frame,
+            text="File Preview:",
+            font=helv.large,
+            anchor="w",
+            justify="left")
         self.preview_label.place(relx=0.15, rely=0.1, anchor="center")
 
         self.preview_window = tk.Label(
             self.sub_preview_frame, textvariable=self.preview_var)
         self.preview_window.configure(
-            anchor="nw", justify="left", font=helv.large, wraplength=425)
+            anchor="nw",
+            justify="left",
+            font=helv.large,
+            wraplength=425)
         self.preview_window.pack(fill="both")
 
 
 if __name__ == '__main__':
 
     # Initializes parser for commandline call and sets flags.
-    parser = argparse.ArgumentParser(description="Formats .rtf files for use "
-                                     "with ProPresenter6 import function. "
-                                     "Or optionally, you can run without "
-                                     "arguments and you will be brought to an "
-                                     "interactive commandline interface.")
+    parser = argparse.ArgumentParser(
+        description="Formats .rtf files for use "
+        "with ProPresenter6 import function. "
+        "Or optionally, you can run without "
+        "arguments and you will be brought to an "
+        "interactive commandline interface.")
 
-    parser.add_argument("-c", "--confirm", action="store_true",
-                        help="Skips having to confirm processing on every "
-                        "file")
+    parser.add_argument(
+        "-c",
+        "--confirm",
+        action="store_true",
+        help="Skips having to confirm processing on every "
+        "file")
     parser.add_argument("-f", "--files", nargs="*",
                         help="Full file paths of all files "
                         "that you want to process")
@@ -134,28 +154,33 @@ if __name__ == '__main__':
             if os.path.exists(file):
                 print(f"Modifiying file \"{file}\".")
                 # If the "confirm all" flag is not raised, will ask for user
-                # confirmation for each file before processing is applied.
+                # confirmation for each file before processing is
+                # applied.
                 if not args.confirm:
 
                     # Starts decision loop
                     # User must give valid answer for loop to exit.
                     confirmation = None
                     while confirmation is None:
-                        print("\nAre you sure you would like to modify "
-                              f"\"{file}\"? Please confirm. \n(y/n)?")
+                        print(
+                            "\nAre you sure you would like to modify "
+                            f"\"{file}\"? Please confirm. \n(y/n)?")
                         selection = input(">")
 
                         if selection == "n":
-                            print(f"\nUser canceled processing on \"{file}\"."
-                                  "\n")
+                            print(
+                                f"\nUser canceled processing on \"{file}\"."
+                                "\n")
                             confirmation = False
 
                         elif selection == "y":
-                            print(f"\nRecieved go-ahead for \"{file}\".")
+                            print(
+                                f"\nRecieved go-ahead for \"{file}\".")
                             confirmation = True
 
                         else:
-                            print("\nInvalid Selection, please try again. \n")
+                            print(
+                                "\nInvalid Selection, please try again. \n")
 
                     # If user selects no for this file,
                     # the program will continue on to the next file.
@@ -167,7 +192,8 @@ if __name__ == '__main__':
 
                 # Checks if file was really created.
                 if os.path.exists(new_file_path):
-                    print(f"New file created @ \"{new_file_path}\".\n")
+                    print(
+                        f"New file created @ \"{new_file_path}\".\n")
                 else:
                     print("Error creating new file.\n")
 
