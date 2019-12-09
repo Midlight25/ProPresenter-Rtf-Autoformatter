@@ -58,6 +58,7 @@ class font:
     def __init__(self, font_name):
         self.med = (str(font_name), 12)
         self.large = (str(font_name), 14)
+        self.small = (str(font_name), 10)
 
 
 class prog_GUI:
@@ -71,6 +72,9 @@ class prog_GUI:
 
         self.preview_var = tk.StringVar()
         self.preview_var.set("No File Selected")
+
+        self.file_name_var = tk.StringVar()
+
         # Frames
         self.title_frame = tk.Frame(
             self.master, bg="pink", width=frame_width, height=30, )
@@ -102,6 +106,26 @@ class prog_GUI:
             font=helv.large,
             width=50,)
         self.title_label.pack()
+
+        self.selection_file_display = tk.Label(
+            self.selection_frame,
+            textvariable=self.file_name_var,
+            anchor="center",
+            justify="left",
+            font=helv.med,
+            width=10,
+            bg="blue")
+        self.selection_file_display.grid(
+            column=0, padx=10, row=1, pady=10)
+
+        self.open_file_button = tk.Button(
+            self.selection_frame,
+            anchor="center",
+            font=helv.large,
+            text="Open File",
+            bg="green"
+        )
+        self.open_file_button.grid(column=1)
 
         self.preview_window = tk.Label(
             self.preview_frame,
