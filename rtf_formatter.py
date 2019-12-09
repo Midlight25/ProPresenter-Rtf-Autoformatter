@@ -98,12 +98,11 @@ class prog_GUI:
         # Labels
         self.title_label = tk.Label(
             self.title_frame,
-            text="Automatically format your files effortlessly",
-            anchor="e",
-            font=helv.med,
-            width=50,
-            justify="right")
-        self.title_label.grid(row=1, column=2)
+            text="ProPresenter Auto Formatter",
+            anchor="center",
+            font=helv.large,
+            width=50,)
+        self.title_label.pack()
 
         self.preview_label = tk.Label(
             self.preview_frame,
