@@ -71,9 +71,10 @@ class prog_GUI:
         # Variables
 
         self.preview_var = tk.StringVar()
-        self.preview_var.set("No File Selected")
+        self.preview_var.set("> Awaiting File Selection")
 
         self.file_name_var = tk.StringVar()
+        self.file_name_var.set("No File Selected")
 
         # Frames
         self.title_frame = tk.Frame(
@@ -84,6 +85,8 @@ class prog_GUI:
             self.master, bg="red", width=frame_width, height=50)
         self.selection_frame.place(
             relx=0.5, rely=0.15, anchor="center")
+        self.selection_frame.columnconfigure(0, weight=2)
+        self.selection_frame.columnconfigure(1, weight=1)
 
         self.preview_frame = tk.Frame(
             self.master, bg="blue")
@@ -113,19 +116,18 @@ class prog_GUI:
             anchor="center",
             justify="left",
             font=helv.med,
-            width=10,
+            width=40,
             bg="blue")
-        self.selection_file_display.grid(
-            column=0, padx=10, row=1, pady=10)
+        self.selection_file_display.grid(column=0, row=0, sticky="w")
 
         self.open_file_button = tk.Button(
             self.selection_frame,
-            anchor="center",
-            font=helv.large,
-            text="Open File",
-            bg="green"
+            text="Open",
+            height=1,
+            padx=2,
+            pady=2
         )
-        self.open_file_button.grid(column=1)
+        self.open_file_button.grid(column=1, row=0, ipadx=10, ipady=2)
 
         self.preview_window = tk.Label(
             self.preview_frame,
